@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: db-replicaset
+  labels:
+    app: banco
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: banco
+  template:
+    metadata:
+      labels:
+        app: banco
+    spec:
+      containers:
+      - name: banco
+        image: everttongomes/banco-it_talent:latest
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "qwe123"
+        - name: MYSQL_DATABASE
+          value: "meubanco"
+        - name: MYSQL_USER
+          value: "user"
+        - name: MYSQL_PASSWORD
+          value: "qwe123"
+        ports:
+        - containerPort: 3306
+
